@@ -249,14 +249,14 @@ dissect_dm1(proto_tree *tree, tvbuff_t *tvb, packet_info *pinfo, int offset)
 
 	if (llid == 3 && btbrlmp_handle) {
 		/* LMP */
-		pld_tvb = tvb_new_subset(tvb, offset, len, len);
+		pld_tvb = tvb_new_subset_length_caplen(tvb, offset, len, len);
 		call_dissector(btbrlmp_handle, pld_tvb, pinfo, dm1_tree);
 	} else if (llid == 2 && btl2cap_handle) {
 		/* unfragmented L2CAP or start of fragment */
 		l2len = tvb_get_letohs(tvb, offset);
 		if (l2len + 4 == len) {
 			/* unfragmented */
-			pld_tvb = tvb_new_subset(tvb, offset, len, len);
+			pld_tvb = tvb_new_subset_length_caplen(tvb, offset, len, len);
 			call_dissector_with_data(btl2cap_handle, pld_tvb, pinfo, dm1_tree, &fake_acl_data);
 		} else {
 			/* start of fragment */
@@ -569,7 +569,7 @@ proto_reg_handoff_btbb(void)
 {
 	dissector_handle_t btbb_handle;
 
-	btbb_handle = new_create_dissector_handle(dissect_btbb, proto_btbb);
+	btbb_handle = create_dissector_handle(dissect_btbb, proto_btbb);
 	/* hijacking this ethertype */
 	dissector_add_uint("ethertype", 0xFFF0, btbb_handle);
 	/* dissector_add_uint("wtap_encap", WTAP_ENCAP_BLUETOOTH_BASEBAND, btbb_handle); */

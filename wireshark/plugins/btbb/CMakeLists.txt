@@ -28,11 +28,11 @@ set(CMAKE_BACKWARDS_COMPATIBILITY 2.6)
 set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
 
 IF ( NOT CMAKE_INSTALL_LIBDIR )
-  set(CMAKE_INSTALL_LIBDIR ~/.wireshark/plugins)
+  set(CMAKE_INSTALL_LIBDIR ~/.local/lib/wireshark/plugins/2.6/epan)
 ENDIF ( NOT CMAKE_INSTALL_LIBDIR )
 MESSAGE (STATUS "Plugin will be installed in: ${CMAKE_INSTALL_LIBDIR}")
 
-INCLUDE(UseMakeDissectorReg)
+INCLUDE(UseMakePluginReg)
   
 set(GLIB2_MIN_VERSION 2.4.0)
 
@@ -70,7 +70,7 @@ endif()
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 
-register_dissector_files(plugin.c
+register_plugin_files(plugin.c
 	plugin
 	${DISSECTOR_SRC}
 )
