@@ -1,3 +1,12 @@
+Note:
+
+This repository was forked from https://github.com/greatscottgadgets/libbtbb
+to update the included Wireshark dissector plugin. The actual libbtbb was not
+modified and is not going to be maintained, please refer to the original repository.
+
+A standalone repository of the LMP Wireshark dissector plugin can be found here:
+https://github.com/demantz/lmp_wireshark_dissector
+
 libbtbb
 =======
 
